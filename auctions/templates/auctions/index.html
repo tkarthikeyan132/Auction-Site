@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% for al in active_listings %}
+    <div style="padding-left: 20px;margin-bottom: 3px;box-shadow: 2px;border: 1px solid gray">
+        <br>
+        <a href="{% url 'listing' al.id%}" style="font-size:25px">{{al.title}}</a>
+        <h5>{{al.description}}</h5>
+        <img src={{al.image}} alt="Image Not available" style="width:160px;height:160px;">
+        <h5>Rs {{al.current_price}}</h5>
+        <h6>Created : {{al.time}}</h6>
+        <br>
+    </div>
+    {% empty %}
+        <h4>No listings available</h4>
+    {% endfor %}
+{% endblock %}

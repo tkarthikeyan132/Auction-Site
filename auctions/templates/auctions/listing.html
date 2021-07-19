@@ -1,0 +1,67 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {% if message %}
+    <div>{{ message }}</div>
+    {% endif %}
+    {% if user.is_authenticated %}
+        {% if user.id is listing.lister.id %}
+            {% if listing.active %}    
+            <form action="{% url 'closelisting' listing.id%}" method="post">
+                {% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="Close the listing">
+            </form>
+            <br>
+            {% else %}
+                <h4>Congratulations, You have Won this listing !!!</h4>    
+            {% endif %}
+        {% endif %}
+        {% if flag3 %}
+            <form action="{% url 'removewatchlist' listing.id%}" method="post">
+                {% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="Remove from Watchlist">
+            </form>
+            <br>
+        {% else %}
+            <form action="{% url 'addwatchlist' listing.id%}" method="post">
+                {% csrf_token %}
+                <input class="btn btn-primary" type="submit" value="Add to Watchlist">
+            </form>
+            <br>
+        {% endif %}
+    {% endif %}
+    <h2>{{listing.title}}</h2>
+    <h5>{{listing.description}}</h5>
+    <img src={{listing.image}} alt="Image Not available" style="width:360px;height:360px;">
+    <h5>Rs {{listing.current_price}}</h5>
+    <h5>Category : {{listing.category}}</h5>
+    <h5>Created by : {{listing.lister}}</h5>
+    <h6>Created time : {{listing.time}}</h6>
+
+    {% if user.is_authenticated and listing.active %}
+    <form action="{% url 'bid' listing.id%}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" style="width:25%; min-width:100px;" type="number" name="amount" placeholder="Wanna bid something !">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Bid">
+    </form>
+    <br>
+    <form action="{% url 'comment' listing.id%}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" type="text" name="comment_txt" placeholder="Write a comment">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Add Comment">
+    </form>
+    {% endif %}
+    <br>
+    {% for cmt in comments %}
+    <div style="padding-left: 20px;margin-bottom: 3px; margin-top:5px; box-shadow: 2px;border: 1px solid gray">
+        <h5>{{cmt.comment}}</h5>
+        <h6>{{cmt.commenter.username}}   {{cmt.time}}</h6>
+    </div>
+    {% empty %}
+        <h5>No comments available</h5>
+    {% endfor %}
+{% endblock %}

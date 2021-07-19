@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>{{category.category}}</h2>
+    {% for cl in category_listing %}
+    <div style="padding-left: 20px;margin-bottom: 3px;box-shadow: 2px;border: 1px solid gray">
+        <br>
+        <a href="{% url 'listing' cl.id%}" style="font-size:25px">{{cl.title}}</a>
+        <h5>{{cl.description}}</h5>
+        <img src={{cl.image}} alt="Image Not available" style="width:160px;height:160px;">
+        <h5>Rs {{cl.current_price}}</h5>
+        <h6>Created : {{cl.time}}</h6>
+        <br>
+    </div>
+    {% empty %}
+        <h4>No listings available for this category</h4>
+    {% endfor %}
+{% endblock %}
