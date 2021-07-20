@@ -1,7 +1,7 @@
 # Commerce Web Application
 
 After cloning the repository
-In your terminal, cd into the commerce directory.
+In your terminal, 
 Run `python3 manage.py runserver` to localhost the application 
 
 
