@@ -23,3 +23,25 @@ Run `python3 manage.py runserver` to localhost the application
 **Categories**: Users are able to visit a page that displays a list of all listing categories. Clicking on the name of any category takes the user to a page that displays all of the active listings in that category.
 
 **Django Admin Interface**: Via the Django admin interface, a site administrator is able to view, add, edit, and delete any listings, comments, and bids made on the site.
+
+## Screenshots
+
+***Home Page***
+
+![Alt](Screenshots/home_page.png)
+
+***Create Listing Page***
+
+![Alt](Screenshots/create_listing.png)
+
+***Listing Page***
+
+![Alt](Screenshots/listing_page.png)
+
+***Toys Category Page***
+
+![Alt](Screenshots/toys_category.png)
+
+***Watchlist Page***
+
+![Alt](Screenshots/watchlist_page.png)
